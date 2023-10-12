@@ -1,10 +1,9 @@
 {
-  "name": "@agoric/helper-ui",
-  "version": "0.1.2",
-  "description": "helper React frontend",
+  "name": "@agoric/explorer",
+  "version": "0.0.1",
+  "description": "agoric explorer",
   "author": "Agoric",
   "license": "Apache-2.0",
-  "homepage": "/helper",
   "type": "module",
   "dependencies": {
     "@agoric/vat-data": "0.3.1",

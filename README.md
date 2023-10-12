@@ -9,9 +9,9 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000/helper/](http://localhost:3000/helper/) (the trailing slash is needed!) to view it in the browser.
+Open [http://localhost:3000/](http://localhost:3000/) (the trailing slash is needed!) to view it in the browser.
 
-You will need to add the access token copied from `agoric open` to the url, like http://localhost:3000/helper/#accessToken=<access-token>
+You will need to add the access token copied from `agoric open` to the url, like http://localhost:3000/#accessToken=<access-token>
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
