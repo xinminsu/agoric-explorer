@@ -297,15 +297,13 @@ const Provider = ({ children }) => {
       if (outdated) {
         return;
       }
-      const WalletConnection = mod.default;
-      setConnectionComponent(<WalletConnection />);
+      const QueryConnection = mod.default;
+      setConnectionComponent(<QueryConnection />);
       attempts = 0;
     };
-    if (connectionConfig.type === ConnectionConfigType.SMART) {
-      importer = () => import('../components/SmartWalletConnection');
-    } else {
-      importer = () => import('../components/WalletConnection');
-    }
+
+    importer = () => import('../components/QueryConnection');
+
     connect().catch(retry);
     return () => {
       outdated = true;
