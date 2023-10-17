@@ -297,12 +297,16 @@ const Provider = ({ children }) => {
       if (outdated) {
         return;
       }
-      const QueryConnection = mod.default;
-      setConnectionComponent(<QueryConnection />);
+      const WalletConnection = mod.default;
+      setConnectionComponent(<WalletConnection />);
       attempts = 0;
     };
 
-    importer = () => import('../components/QueryConnection');
+    if (connectionConfig.type === ConnectionConfigType.SMART) {
+      importer = () => import('../components/SmartWalletConnection');
+    } else {
+      importer = () => import('../components/WalletConnection');
+    }
 
     connect().catch(retry);
     return () => {
