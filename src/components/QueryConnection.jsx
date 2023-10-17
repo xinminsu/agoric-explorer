@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/display-name */
-export { makeReactAgoricQueryConnection } from '@agoric/query-components/react.js';
+export { makeReactAgoricQueryConnection } from '@suxinmin/query-components/react.js';
 import React, { useState, useEffect } from 'react';
 import { E } from '@endo/eventual-send';
 import { observeIterator } from '@agoric/notifier';
