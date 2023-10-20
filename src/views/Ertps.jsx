@@ -1,148 +1,136 @@
 import { useState, useReducer } from 'react';
-import { Typography } from '@mui/material';
-import { E } from '@endo/eventual-send';
-import Button from '@mui/material/Button';
-import Add from '@mui/icons-material/Add';
-import CircularProgress from '@mui/material/CircularProgress';
-import Snackbar from '@mui/material/Snackbar';
-import Card from '../components/Card';
-import CardItem from '../components/CardItem';
-import MakePurse from '../components/MakePurse';
-import ImportIssuer from '../components/ImportIssuer';
-import Loading from '../components/Loading';
-import Petname from '../components/Petname';
-import { icons, defaultIcon } from '../util/Icons';
-import { withApplicationContext } from '../contexts/Application';
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import {withApplicationContext} from "../contexts/Application.jsx";
+import Card from "../components/Card.jsx";
+import Loading from "../components/Loading.jsx";
+import CardItem from "../components/CardItem.jsx";
+import {defaultIcon, icons} from "../util/Icons.js";
+import Petname from "../components/Petname.jsx";
+import CircularProgress from "@mui/material/CircularProgress";
+import Button from "@mui/material/Button";
+import Purses from "../components/Purses.jsx";
 
-import './Ertps.scss';
+const CustomTabPanel = (props) => {
+  const { children, value, index, ...other } = props;
 
-const importingIssuersReducer = (state, action) => {
-  return { count: state.count + action.difference };
+  return (
+      <div
+          role="tabpanel"
+          hidden={value !== index}
+          id={`ertp-tabpanel-${index}`}
+          aria-labelledby={`ertp-tab-${index}`}
+          {...other}
+      >
+        {value === index && (
+            <Box sx={{ p: 3 }}>
+              <Typography>{children}</Typography>
+            </Box>
+        )}
+      </div>
+  );
+}
+
+CustomTabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
-// Exported for testing only.
-export const IssuersWithoutContext = ({
-  issuers,
-  pendingPurseCreations,
-  schemaActions,
-  services,
-}) => {
+const a11yProps = (index) => {
+  return {
+    id: `ertp-tab-${index}`,
+    'aria-controls': `ertp-tabpanel-${index}`,
+  };
+}
+
+export const ErtpsnewWithoutContext = ({
+                                         issuers,
+                                         pendingPurseCreations,
+                                         schemaActions,
+                                         services,
+                                       }) => {
+  const [value, setValue] = React.useState(0);
+
   const [selectedIssuer, setSelectedIssuer] = useState(null);
   const handleCreatePurse = id => setSelectedIssuer(id);
   const closeMakePurse = () => setSelectedIssuer(null);
 
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const handleCloseSnackbar = _ => {
-    setIsSnackbarOpen(false);
-  };
-  const [snackbarMessage, setSnackbarMessage] = useState('');
-  const showSnackbar = msg => {
-    setSnackbarMessage(msg);
-    setIsSnackbarOpen(true);
-  };
-
-  const [importingIssuers, dispatchImportingIssuers] = useReducer(
-    importingIssuersReducer,
-    { count: 0 },
-  );
-  const incrementImportingIssuers = () =>
-    dispatchImportingIssuers({ difference: 1 });
-  const decrementImportingIssuers = () =>
-    dispatchImportingIssuers({ difference: -1 });
-
-  const [showImport, setShowImport] = useState(false);
-  const closeImport = () => setShowImport(false);
-
-  const handleImport = async (petname, boardId) => {
-    incrementImportingIssuers();
-    try {
-      const issuerObj = await E(services.board).getValue(boardId);
-      await E(schemaActions).createIssuer(issuerObj, petname);
-      showSnackbar('Successfully imported issuer.');
-    } catch {
-      showSnackbar('Failed to import issuer.');
-    } finally {
-      decrementImportingIssuers();
-    }
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   const Issuer = (issuer, index) => {
     return (
-      <CardItem key={issuer.id} hideDivider={index === 0}>
-        <div className="Left">
-          <img
-            alt="icon"
-            src={icons[issuer.issuerPetname] ?? defaultIcon}
-            height="32px"
-            width="32px"
-          />
-          <div>
-            <Petname name={issuer.issuerPetname} />
+        <CardItem key={issuer.id} hideDivider={index === 0}>
+          <div className="Left">
+            <img
+                alt="icon"
+                src={icons[issuer.issuerPetname] ?? defaultIcon}
+                height="32px"
+                width="32px"
+            />
             <div>
-              Board ID: (<span className="Board">{issuer.issuerBoardId}</span>)
+              <Petname name={issuer.issuerPetname} />
+              <div>
+                Board ID: (<span className="Board">{issuer.issuerBoardId}</span>)
+              </div>
             </div>
           </div>
-        </div>
-        <div className="Right">
-          {pendingPurseCreations.has(issuer.id) ? (
-            <div className="IssuerProgressWrapper">
-              <CircularProgress size={30} />
-            </div>
-          ) : (
-            <Button
-              variant="outlined"
-              size="small"
-              onClick={() => handleCreatePurse(issuer.id)}
-            >
-              Make Purse
-            </Button>
-          )}
-        </div>
-      </CardItem>
+          <div className="Right">
+            {pendingPurseCreations.has(issuer.id) ? (
+                <div className="IssuerProgressWrapper">
+                  <CircularProgress size={30} />
+                </div>
+            ) : (
+                <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={() => handleCreatePurse(issuer.id)}
+                >
+                  Make Purse
+                </Button>
+            )}
+          </div>
+        </CardItem>
     );
   };
 
   const issuerItems = (issuers && issuers.map(Issuer)) ?? (
-    <Loading defaultMessage="Fetching issuers..." />
+      <Loading defaultMessage="Fetching issuers..."/>
   );
 
   return (
-    <>
-      <Typography variant="h1">Asset Issuers</Typography>
-      <div className="ImportButton">
-        <Button
-          onClick={() => setShowImport(true)}
-          aria-label="import"
-          size="medium"
-          variant="contained"
-        >
-          <Add style={{ marginRight: '4px' }} /> Import
-        </Button>
-        <div className="ImportIssuerProgress">
-          {importingIssuers.count > 0 && <CircularProgress size={36} />}
-        </div>
-      </div>
-      <div className="Card-wrapper">
-        <Card>{issuerItems}</Card>
-      </div>
-      <MakePurse issuerId={selectedIssuer} handleClose={closeMakePurse} />
-      <ImportIssuer
-        handleClose={closeImport}
-        handleImport={handleImport}
-        isOpen={showImport}
-      />
-      <Snackbar
-        open={isSnackbarOpen}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        autoHideDuration={3000}
-        onClose={handleCloseSnackbar}
-        message={snackbarMessage}
-      />
-    </>
+      <Box sx={{ width: '100%' }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+            <Tab label="Purses" {...a11yProps(0)} />
+            <Tab label="Issuers" {...a11yProps(1)} />
+            <Tab label="Boards" {...a11yProps(2)} />
+          </Tabs>
+        </Box>
+        <CustomTabPanel value={value} index={0}>
+          <div className="Flex-item Purses">
+            <Purses />
+          </div>
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}>
+          <div className="Card-wrapper">
+            <Card>{issuerItems}</Card>
+          </div>
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={2}>
+          Item Three
+        </CustomTabPanel>
+      </Box>
   );
-};
+}
 
-export default withApplicationContext(IssuersWithoutContext, context => ({
+export default withApplicationContext(ErtpsnewWithoutContext, context => ({
   issuers: context.issuers,
   pendingPurseCreations: context.pendingPurseCreations,
   schemaActions: context.schemaActions,
