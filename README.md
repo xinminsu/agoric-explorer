@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## prepare
+## Prepare
 
 install the
 [prerequisites](https://agoric.com/documentation/getting-started/before-using-agoric.html).
@@ -28,7 +28,7 @@ cd agoric-sdk/packages/cosmic-swingset
 make scenario2-run-client
 ```
 
-install the explorer
+Install the explorer
 ```sh
 git clone https://github.com/xinminsu/agoric-explorer
 cd agoric-eplorer
