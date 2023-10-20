@@ -1,9 +1,20 @@
+import Run from '../tokens/RUN.svg';
+import Bld from '../tokens/BLD.svg';
+import Atom from '../tokens/cosmos.svg';
+import Link from '../tokens/chainlink.png';
+import Usdc from '../tokens/usdc.svg';
+import defaultIcon from '../tokens/generic.ico';
+
 export const icons = {
-  RUN: 'tokens/RUN.svg',
-  BLD: 'tokens/BLD.svg',
-  ATOM: 'tokens/cosmos.svg',
-  LINK: 'tokens/chainlink.png',
-  USDC: 'tokens/usdc.svg',
+  'AUSD': Run,
+  'IST': Run,
+  'RUN': Run,
+  'BLD': Bld,
+  'ATOM': Atom,
+  'LINK': Link,
+  'USDC': Usdc,
+  'defaultIcon': defaultIcon,
 };
 
-export const defaultIcon = 'tokens/generic.ico';
+export default icons;
+
