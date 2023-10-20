@@ -1,7 +1,13 @@
+# Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## prepare
+
 install the
 [prerequisites](https://agoric.com/documentation/getting-started/before-using-agoric.html).
 
-### Execute every command below in a seperate terminal
+## Execute every command below in a seperate terminal
 
 Install the sdk
 ```sh
@@ -21,11 +27,6 @@ Start `ag-solo`
 cd agoric-sdk/packages/cosmic-swingset
 make scenario2-run-client
 ```
-
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
