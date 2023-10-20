@@ -1,6 +1,7 @@
 import { useState, useReducer } from 'react';
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
@@ -14,6 +15,47 @@ import Petname from "../components/Petname.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import Purses from "../components/Purses.jsx";
+
+const AntTabs = styled(Tabs)({
+    borderBottom: '1px solid #e8e8e8',
+    '& .MuiTabs-indicator': {
+        backgroundColor: '#1890ff',
+    },
+});
+
+const AntTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
+    textTransform: 'none',
+    minWidth: 0,
+    [theme.breakpoints.up('sm')]: {
+        minWidth: 0,
+    },
+    fontWeight: theme.typography.fontWeightRegular,
+    marginRight: theme.spacing(1),
+    color: 'rgba(0, 0, 0, 0.85)',
+    fontFamily: [
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+    ].join(','),
+    '&:hover': {
+        color: '#40a9ff',
+        opacity: 1,
+    },
+    '&.Mui-selected': {
+        color: '#1890ff',
+        fontWeight: theme.typography.fontWeightMedium,
+    },
+    '&.Mui-focusVisible': {
+        backgroundColor: '#d1eaff',
+    },
+}));
 
 const CustomTabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -107,11 +149,11 @@ export const ErtpsnewWithoutContext = ({
   return (
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="Purses" {...a11yProps(0)} />
-            <Tab label="Issuers" {...a11yProps(1)} />
-            <Tab label="Boards" {...a11yProps(2)} />
-          </Tabs>
+          <AntTabs value={value} onChange={handleChange} aria-label="ant example">
+            <AntTab label="Purses"  />
+            <AntTab label="Issuers"  />
+            <AntTab label="Boards"  />
+          </AntTabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
           <div className="Flex-item Purses">
