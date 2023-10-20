@@ -53,7 +53,7 @@ const appTheme = createTheme({
 
 ReactDOM.render(
   <ApplicationContextProvider>
-    <Router basename="/helper">
+    <Router basename="/explorer">
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={appTheme}>
           <CssBaseline />

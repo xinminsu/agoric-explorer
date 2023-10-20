@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/display-name */
-import { makeReactAgoricWalletConnection } from '@agoric/web-components/react.js';
+import { makeReactAgoricWalletConnection } from '@suxinmin/web-components/react.js';
 import React, { useState, useEffect } from 'react';
 import { E } from '@endo/eventual-send';
 import { observeIterator } from '@agoric/notifier';

@@ -4,10 +4,9 @@ import { Switch, Route } from 'react-router-dom';
 import { makeStyles, useTheme } from '@mui/styles';
 import AppBar from './components/AppBar';
 import NavMenu from './components/NavMenu';
-import Contacts from './views/Contacts';
-import Dapps from './views/Dapps';
-import Dashboard from './views/Dashboard';
-import Issuers from './views/Issuers';
+import Contracts from './views/Contracts';
+import Transactions from './views/Transactions';
+import Ertps from './views/Ertps';
 
 import './App.scss';
 
@@ -40,17 +39,14 @@ const App = () => {
       </span>
       <main className={classes.main}>
         <Switch>
-          <Route path="/dapps">
-            <Dapps />
+          <Route path="/contracts">
+            <Contracts />
           </Route>
-          <Route path="/contacts">
-            <Contacts />
-          </Route>
-          <Route path="/issuers">
-            <Issuers />
+          <Route path="/ertps">
+            <Ertps />
           </Route>
           <Route path="/">
-            <Dashboard />
+            <Transactions />
           </Route>
         </Switch>
       </main>

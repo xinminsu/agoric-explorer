@@ -14,7 +14,7 @@ import Petname from '../components/Petname';
 import { icons, defaultIcon } from '../util/Icons';
 import { withApplicationContext } from '../contexts/Application';
 
-import './Issuers.scss';
+import './Ertps.scss';
 
 const importingIssuersReducer = (state, action) => {
   return { count: state.count + action.difference };

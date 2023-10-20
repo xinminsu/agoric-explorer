@@ -2,12 +2,12 @@ import { Typography } from '@mui/material';
 import Purses from '../components/Purses';
 import Requests from '../components/Requests';
 
-import './Dashboard.scss';
+import './Transactions.scss';
 
-const Dashboard = () => {
+const Transactions = () => {
   return (
     <>
-      <Typography variant="h1">Dashboard</Typography>
+      <Typography variant="h1">Transactions</Typography>
       <span className="Content">
         <div className="Flex-item">
           <Requests />
@@ -20,4 +20,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Transactions;

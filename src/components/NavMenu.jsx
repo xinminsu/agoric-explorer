@@ -5,10 +5,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import Apps from '@mui/icons-material/Apps';
-import People from '@mui/icons-material/People';
-import AddCircle from '@mui/icons-material/AddCircle';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import GavelIcon from '@mui/icons-material/Gavel';
+import WebAssetIcon from '@mui/icons-material/WebAsset';
 
 const useStyles = makeStyles(theme => ({
   nav: {
@@ -79,31 +78,25 @@ const NavMenu = ({ setDrawerOpened }) => {
 
   return (
     <nav className={styles.nav}>
-      <div className={styles.sectionHeader}>Wallet</div>
+      <div className={styles.sectionHeader}>explorer</div>
       <List>
         <ListItemLink
           onClick={onLinkClick}
           to="/"
-          primary="Dashboard"
-          icon={<DashboardIcon />}
+          primary="Transactions"
+          icon={<ReceiptIcon />}
         />
         <ListItemLink
           onClick={onLinkClick}
-          to="/dapps"
-          primary="Dapps"
-          icon={<Apps />}
+          to="/contracts"
+          primary="Contract Facets"
+          icon={<GavelIcon />}
         />
         <ListItemLink
           onClick={onLinkClick}
-          to="/contacts"
-          primary="Contacts"
-          icon={<People />}
-        />
-        <ListItemLink
-          onClick={onLinkClick}
-          to="/issuers"
-          primary="Asset Issuers"
-          icon={<AddCircle />}
+          to="/ertps"
+          primary="ERTP Assets"
+          icon={<WebAssetIcon />}
         />
       </List>
     </nav>

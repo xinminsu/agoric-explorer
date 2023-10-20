@@ -10,10 +10,10 @@ import Dapp from '../components/Dapp';
 import Loading from '../components/Loading';
 import { withApplicationContext } from '../contexts/Application';
 
-import './Dapps.scss';
+import './Contracts.scss';
 
 // Exported for testing only.
-export const DappsWithoutContext = ({ dapps }) => {
+export const ContractsWithoutContext = ({ dapps }) => {
   dapps = dapps?.filter(({ enable }) => enable);
 
   const remove = ({ actions }) => E(actions).delete();
@@ -94,6 +94,6 @@ export const DappsWithoutContext = ({ dapps }) => {
   );
 };
 
-export default withApplicationContext(DappsWithoutContext, context => ({
+export default withApplicationContext(ContractsWithoutContext, context => ({
   dapps: context.dapps,
 }));
