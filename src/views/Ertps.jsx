@@ -10,7 +10,7 @@ import {withApplicationContext} from "../contexts/Application.jsx";
 import Card from "../components/Card.jsx";
 import Loading from "../components/Loading.jsx";
 import CardItem from "../components/CardItem.jsx";
-import {icons} from "../util/Icons.js";
+import BrandIcon from '../components/BrandIcon';
 import Petname from "../components/Petname.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
@@ -107,22 +107,11 @@ export const ErtpsnewWithoutContext = ({
   };
 
   const Issuer = (issuer, index) => {
-    let iconName;
-    if(!issuer.brandPetname) {
-        iconName = 'defaultIcon';
-    } else if(issuer.brandPetname.indexOf('USDC') >=0 ){
-        iconName = 'USDC';
-    }
 
     return (
         <CardItem key={issuer.id} hideDivider={index === 0}>
           <div className="Left">
-            <img
-                alt="icon"
-                src={icons[iconName ?? issuer.brandPetname ]  }
-                height="32px"
-                width="32px"
-            />
+            <BrandIcon brandPetname={issuer.issuerPetname} />
             <div>
               <Petname name={issuer.issuerPetname} />
               <div>
