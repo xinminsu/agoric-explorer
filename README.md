@@ -12,7 +12,7 @@ install the
 Install the sdk
 ```sh
 cd agoric-sdk
-git checkout 65d3f14c8102993168d2568eed5e6acbcba0c48a
+git checkout
 yarn && yarn build
 ```
 
